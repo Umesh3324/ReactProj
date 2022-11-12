@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import Todos from "./Todos";
 
 const App = () => {
@@ -8,6 +8,11 @@ const App = () => {
 
   const increment = () => {
     setCount((c) => c + 1);
+    
+  };
+  const decrease = () => {
+    setCount((c = 30) => c - 1);
+    
   };
   
   return (
@@ -17,6 +22,9 @@ const App = () => {
       <div>
         Count: {count}
         <button onClick={increment}>+</button>
+        <button onClick={decrease}>-</button>
+        
+       
       </div>
     </>
   );

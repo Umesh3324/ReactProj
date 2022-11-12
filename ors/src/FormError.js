@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import marksheet from './Addmarksheet';
+// import College from './Addcollege';
 
 //input validation util class
 class FormError extends Component {

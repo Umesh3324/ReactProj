@@ -5,7 +5,7 @@ import BaseCtl from './BaseCtl';
 import Dashboard from './Dashboard';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button,  Container, Form, } from 'react-bootstrap';
 import FormMessage from './FormMessage';
 import FormError from './FormError';
 
@@ -51,24 +51,37 @@ class marksheet extends BaseCtl {
     }
   }
   /*to get the marksheet data */
-  get() {
+  get() { 
     let id = this.props.match.params.pid;
     console.log(id);
     var url = "http://api.sunilos.com:9080/ORSP10/Marksheet/get/" + id;
-    let _self = this;
+    let _self= this;
     axios.get(url).then((res) => {
       this.setState({ form: res.data.result.data });
     });
+  } 
+  resetForm = () => {
+    this.setState({
+      form:{
+        id: '',
+        rollNo: '',
+        name: '',
+        physics: '',
+        chemistry: '',
+        maths: '',
+        studentId: ''
+      }
+    })
   }
   /**save marksheet */
   Save() {
-    let url = "http://api.sunilos.com:9080/ORSP10/Marksheet/save";
+    let url = "http://api.sunilos.com:9080/ORSP10/Marksheet/save";    
     axios.post(url, this.state.form).then((res) => {
       this.setState({ list: res.data.result.data });
       if (res.data.result.inputerror) {
         this.setState({ inputError: res.data.result.inputerror });
         this.changeInputError("error", "true")
-      } 
+      }  
       else {
         this.changeInputError("error", "false")
         this.changeInputError("message", "Data saved Successfully");
@@ -86,14 +99,15 @@ class marksheet extends BaseCtl {
     return (
       <>
         <div className='center'>
-          <Form id="sign-in-form" className="text-left p-3 w-50" >
+          <Form id="sign-in-form" className="text -left p-3 w-50" >
             <table align="center">
               {(() => {
                 if (!this.props.match.params.pid) {
                   return (
                     <h2 align='center'>Add Marksheet</h2>
                   )
-                } if (this.props.match.params.pid) {
+                } 
+                if (this.props.match.params.pid) {
                   return (
                     <h2 align='center'>Update Marksheet</h2>
                   )
@@ -172,7 +186,9 @@ class marksheet extends BaseCtl {
               <div><FormError errorname={this.getInputError("studentId")} /></div>
               <br></br>
               <Button variant="primary" type='button'
-                onClick={(event) => this.Save(event)}>Save</Button>
+                onClick={(event) => this.Save(event)}>Save</Button> &nbsp; &nbsp;
+              <Button type='reset'  variant="danger" onClick={(event) => this.resetForm(event)} >Cancel</Button> 
+              
             </table>
           </Form>
 

@@ -22,7 +22,7 @@ class GetDate extends Component {
     return (
       <div>
         <br></br>
-        <p>Current Date And Time : {this.state.curDT}</p>
+        <p>Current Date And Time :  {this.state.curDT}</p> 
         <p> yyyy-MM-dd :{this.state.currentDate}</p>
       </div>
     )

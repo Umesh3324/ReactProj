@@ -17,7 +17,7 @@ class Binding extends Component {
     })
   }
 
-  render() {
+  render() { 
     return (
       <Container id="main-container" className="d-grid h-100">
         <Form id="sign-in-form" className="text-left p-3 w-100">
